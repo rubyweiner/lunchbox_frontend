@@ -1,5 +1,21 @@
-body {
-  margin: 0;
-  padding: 0;
-  font-family: sans-serif;
+.body {
+  width: 80%;
+  	margin: 0 auto;
+}
+
+.topheader {
+  height: 150px;
+  background-position: center;
+  background-size: cover;
+}
+
+.container {
+	display: grid;
+	grid-template-columns: 2fr 2fr;
+}
+
+ .show {
+  float: right;
+	width: 300px;
+  padding: 10px;
 }
