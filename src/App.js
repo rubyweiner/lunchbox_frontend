@@ -48,6 +48,15 @@ class App extends Component {
     )
   }
 
+  deselectDay = () => {
+    this.setState(
+      {
+        daySelected: false,
+        day: null
+      }
+    )
+  }
+
   render() {
     return (
       <div className="ui segment">
@@ -62,7 +71,7 @@ class App extends Component {
           <Grid.Column width={5}>
             <Segment>
             {this.state.daySelected ?
-              <DaySpec day={this.state.day} groceries={this.state.groceries}/>
+              <DaySpec day={this.state.day} onClick={() => this.deselectDay()}/>
             :
               <WeekdayContainer days={this.state.days} dayDetails={this.dayDetails}/>
             }

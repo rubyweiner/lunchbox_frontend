@@ -1,26 +1,32 @@
 import React from 'react';
-import {Card, Button} from 'semantic-ui-react'
+import GroceryItem from '../components/GroceryItem'
+import {Card, Button,  Image as ImageComponent, Item} from 'semantic-ui-react'
 
 
 export default class DaySpec extends React.Component {
   render() {
-    
     return (
       <Card>
         <Card.Content>
           <Card.Header>{this.props.day.name}</Card.Header>
           <Card.Meta>{this.props.day.meal_name}</Card.Meta>
           <Card.Description>
-            Steve wants to add you to the group <strong>best friends</strong>
+            <Item.Group link>
+              {this.props.day.groceries.map(grocery =>
+                <GroceryItem grocery={grocery}/>
+              )}
+            </Item.Group>
+
           </Card.Description>
         </Card.Content>
-        <Card.Content extra>
-          <div className='ui two buttons'>
-            <Button basic color='green'>
-              Approve
+
+        <Card.Content extra textAlign='center'>
+          <div>
+            <Button basic>
+              Edit
             </Button>
-            <Button basic color='red'>
-              Decline
+            <Button basic onClick={() => this.props.onClick()}>
+              Back
             </Button>
           </div>
         </Card.Content>
