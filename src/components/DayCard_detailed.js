@@ -11,7 +11,7 @@ export default class DayCard_detailed extends React.Component {
           <Card.Header>{this.props.day.name}</Card.Header>
           <Card.Meta>{this.props.day.meal_name}</Card.Meta>
           <Card.Description>
-            <Item.Group link>
+            <Item.Group >
               {this.props.day.groceries.map(grocery =>
                 <GroceryItem grocery={grocery}/>
               )}
