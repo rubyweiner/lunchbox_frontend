@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import './App.css';
 import FridgeContainer from './containers/FridgeContainer'
 import WeekdayContainer from './containers/WeekdayContainer'
-import {Grid, Segment} from 'semantic-ui-react'
+import {Grid, Segment, Image} from 'semantic-ui-react'
+import NavBar from './components/NavBar'
 
 class App extends Component {
   state = {
@@ -36,9 +37,10 @@ class App extends Component {
   }
   render() {
     return (
-
+      <div className="ui segment">
+      <NavBar />
         <Grid columns='equal'>
-          <Grid.Column width={5}>
+          <Grid.Column >
             <Segment>
               <FridgeContainer groceries={this.state.groceries}/>
             </Segment>
@@ -49,6 +51,7 @@ class App extends Component {
             </Segment>
           </Grid.Column>
         </Grid>
+      </div>
     );
   }
 }
