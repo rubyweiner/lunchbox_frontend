@@ -39,6 +39,7 @@ class App extends Component {
     return (
       <div className="ui segment">
       <NavBar />
+      <div className="body">
         <Grid columns='equal'>
           <Grid.Column >
             <Segment>
@@ -51,6 +52,7 @@ class App extends Component {
             </Segment>
           </Grid.Column>
         </Grid>
+        </div>
       </div>
     );
   }

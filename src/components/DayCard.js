@@ -1,10 +1,11 @@
 import React from 'react';
-import {Card, Image} from 'semantic-ui-react'
+import {Card, Image, Grid} from 'semantic-ui-react'
 
 
 export default class DayCard extends React.Component {
   render() {
     return (
+      <Grid.Column>
       <Card.Group>
         <Card href="#">
           <Card.Content>
@@ -13,6 +14,7 @@ export default class DayCard extends React.Component {
           </Card.Content>
         </Card>
       </Card.Group>
+      </Grid.Column>
     )
   }
 }

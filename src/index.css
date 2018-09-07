@@ -1,22 +1,22 @@
 .body {
   width: 100%;
   	margin: 0 auto;
+  padding-top: 10px;
 }
 
 .topheader {
   height: 350px;
-  background-image: url("https://s-i.huffpost.com/gen/4821250/images/n-FULL-FRIDGE-628x314.jpg");
+  background-image: url("https://images.unsplash.com/photo-1509043183980-23be96ae4109?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=797562a1f87a5567cc0c3a0c5239d589&auto=format&fit=crop&w=1526&q=80");
   background-position: center;
   background-size: cover;
 }
 
-.container {
-	display: grid;
-	grid-template-columns: 2fr 2fr;
+.main-page-title {
+  font-family: verdana;
+  color: white;
+  font-size: 50px;
+  padding-top: 24px;
+  padding-left: 20px;
 }
 
- .show {
-  float: right;
-	width: 300px;
-  padding: 10px;
-}
+/* https://s-i.huffpost.com/gen/4821250/images/n-FULL-FRIDGE-628x314.jpg */
