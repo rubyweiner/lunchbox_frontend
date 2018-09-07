@@ -71,7 +71,7 @@ class App extends Component {
           <Grid.Column width={5}>
             <Segment>
             {this.state.daySelected ?
-              <DaySpec day={this.state.day} onClick={() => this.deselectDay()}/>
+              <DaySpec day={this.state.day} deselectDay={() => this.deselectDay()}/>
             :
               <WeekdayContainer days={this.state.days} dayDetails={this.dayDetails}/>
             }
