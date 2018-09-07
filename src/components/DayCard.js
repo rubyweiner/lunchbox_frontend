@@ -7,7 +7,7 @@ export default class DayCard extends React.Component {
     return (
       <Grid.Column>
       <Card.Group>
-        <Card href="#">
+        <Card href="#" onClick={() => this.props.onClick(this.props.day)}>
           <Card.Content>
           <Card.Header>{this.props.day.name}</Card.Header>
           <Card.Meta>{this.props.day.meal_name}</Card.Meta>

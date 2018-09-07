@@ -4,11 +4,14 @@ import FridgeContainer from './containers/FridgeContainer'
 import WeekdayContainer from './containers/WeekdayContainer'
 import {Grid, Segment, Image} from 'semantic-ui-react'
 import NavBar from './components/NavBar'
+import DaySpec from './components/DaySpec'
 
 class App extends Component {
   state = {
     groceries: [],
-    days: []
+    days: [],
+    daySelected: false,
+    day: null
   }
 
   fetchGroceries = () => {
@@ -35,6 +38,16 @@ class App extends Component {
     this.fetchGroceries()
     this.fetchDays()
   }
+
+  dayDetails = (day) => {
+    this.setState(
+      {
+        daySelected: true,
+        day: day
+      }
+    )
+  }
+
   render() {
     return (
       <div className="ui segment">
@@ -48,7 +61,11 @@ class App extends Component {
           </Grid.Column>
           <Grid.Column width={5}>
             <Segment>
-              <WeekdayContainer days={this.state.days}/>
+            {this.state.daySelected ?
+              <DaySpec day={this.state.day} groceries={this.state.groceries}/>
+            :
+              <WeekdayContainer days={this.state.days} dayDetails={this.dayDetails}/>
+            }
             </Segment>
           </Grid.Column>
         </Grid>
