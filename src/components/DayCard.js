@@ -1,5 +1,5 @@
 import React from 'react';
-import {Card, Image, Grid} from 'semantic-ui-react'
+import {Card, Grid} from 'semantic-ui-react'
 
 
 export default class DayCard extends React.Component {

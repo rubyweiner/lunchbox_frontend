@@ -1,5 +1,5 @@
 import React from 'react';
-import {Image as ImageComponent, Item, Button} from 'semantic-ui-react'
+import {Image, Item, Button} from 'semantic-ui-react'
 
 
 export default class GroceryItem extends React.Component {

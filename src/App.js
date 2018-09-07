@@ -4,7 +4,7 @@ import FridgeContainer from './containers/FridgeContainer'
 import WeekdayContainer from './containers/WeekdayContainer'
 import {Grid, Segment, Image} from 'semantic-ui-react'
 import NavBar from './components/NavBar'
-import DaySpec from './components/DaySpec'
+import DaySpec from './containers/DaySpec'
 
 class App extends Component {
   state = {
