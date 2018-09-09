@@ -13,7 +13,10 @@ export default class GroceryItem extends React.Component {
           <Item.Description>calories: {this.props.grocery.calories}</Item.Description>
         </Item.Content>
         <div>
-        <Button circular icon='delete' />
+        {this.props.editMode ?
+          <Button circular icon='delete' onClick={() => this.props.onClick(this.props.grocery)}/>
+        :
+          ''}
         </div>
       </Item>
 

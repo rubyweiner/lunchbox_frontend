@@ -4,7 +4,14 @@ import {Card, Item, Button} from 'semantic-ui-react'
 
 
 export default class DayCard_detailed extends React.Component {
+
+  handleClick = (grocery) => {
+    this.props.removeGrocery(grocery)
+  }
+
+
   render() {
+
     return (
       <Card>
         <Card.Content>
@@ -13,7 +20,7 @@ export default class DayCard_detailed extends React.Component {
           <Card.Description>
             <Item.Group >
               {this.props.day.groceries.map(grocery =>
-                <GroceryItem grocery={grocery}/>
+                <GroceryItem grocery={grocery} onClick={() => this.handleClick(grocery)} editMode={this.props.editMode}/>
               )}
             </Item.Group>
 
@@ -22,7 +29,7 @@ export default class DayCard_detailed extends React.Component {
 
         <Card.Content extra textAlign='center'>
           <div>
-            <Button basic onClick={() => this.props.editDay()}>
+            <Button basic onClick={() => this.props.editDay(this.props.day)}>
               Edit
             </Button>
             <Button basic onClick={() => this.props.deselectDay()}>

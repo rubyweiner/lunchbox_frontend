@@ -23,7 +23,7 @@ export default class DayForm extends React.Component {
         <Form.Input fluid label='Meal Name' placeholder={this.props.day.meal_name} />
           <Item.Group >
             {this.props.day.groceries.map(grocery =>
-              <GroceryItem grocery={grocery}/>
+              <GroceryItem grocery={grocery} editMode={this.props.editMode} onClick={this.props.removeGrocery}/>
             )}
           </Item.Group>
 
