@@ -11,7 +11,9 @@ class App extends Component {
     groceries: [],
     days: [],
     daySelected: false,
-    day: null
+    day: null,
+    editMode: false,
+    groceryToAdd: null
   }
 
   fetchGroceries = () => {
@@ -57,6 +59,18 @@ class App extends Component {
     )
   }
 
+  addGroceries = () => {
+    this.setState(
+      {editMode: true}
+    )
+  }
+
+  addGroceryToDay = (grocery) => {
+    this.setState(
+      {groceryToAdd: grocery}
+    )
+  }
+
   render() {
     return (
       <div className="ui segment">
@@ -65,15 +79,20 @@ class App extends Component {
         <Grid columns='equal'>
           <Grid.Column >
             <Segment>
-              <FridgeContainer groceries={this.state.groceries}/>
+              <FridgeContainer groceries={this.state.groceries} editMode={this.state.editMode} addGroceryToDay={this.addGroceryToDay}/>
             </Segment>
           </Grid.Column>
           <Grid.Column width={5}>
             <Segment>
             {this.state.daySelected ?
-              <DaySpec day={this.state.day} deselectDay={() => this.deselectDay()}/>
+              <DaySpec
+                day={this.state.day}
+                deselectDay={() => this.deselectDay()}
+                addGroceries={this.addGroceries}
+                groceryToAdd={this.state.groceryToAdd}
+              />
             :
-              <WeekdayContainer days={this.state.days} dayDetails={this.dayDetails}/>
+              <WeekdayContainer days={this.state.days} dayDetails={this.dayDetails} />
             }
             </Segment>
           </Grid.Column>

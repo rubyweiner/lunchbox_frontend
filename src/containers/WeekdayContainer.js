@@ -15,7 +15,7 @@ export default class WeekdayContainer extends React.Component {
         <Container textAlign='center'><Header as='h2'>This Week</Header></Container>
         <Grid columns={1} padded>
           {this.props.days.map(day =>
-            <DayCard day={day} onClick={() => this.handleClick(day)}/>
+            <DayCard day={day} onClick={() => this.handleClick(day)} />
           )}
         </Grid>
       </Container>

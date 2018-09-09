@@ -29,15 +29,29 @@ export default class DaySpec extends React.Component {
     this.setState({
       groceries: groceries
     })
+
+    // add patch fetch to make these changes persist
   }
+
+  handleClick = () => {
+    this.props.addGroceries()
+  }
+
+
 
   render() {
 
     return (
       this.state.editMode ?
-        <DayForm day={this.props.day} editMode={this.state.editMode} removeGrocery={this.removeGrocery}/>
+        <DayForm day={this.props.day} editMode={this.state.editMode} removeGrocery={this.removeGrocery} onClick={() => this.handleClick()}/>
       :
-        <DayCard_detailed day={this.props.day} editDay={this.editDay} deselectDay={() => this.deselectDay()} removeGrocery={this.removeGrocery}/>
+        <DayCard_detailed
+          day={this.props.day}
+          editDay={this.editDay}
+          deselectDay={() => this.deselectDay()}
+          removeGrocery={this.removeGrocery}
+          groceryToAdd={this.props.groceryToAdd}
+        />
     )
   }
 }

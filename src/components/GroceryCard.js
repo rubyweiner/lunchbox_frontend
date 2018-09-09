@@ -1,5 +1,5 @@
 import React from 'react';
-import {Card, Image, Grid} from 'semantic-ui-react'
+import {Card, Image, Grid, Button} from 'semantic-ui-react'
 
 
 export default class FridgeContainer extends React.Component {
@@ -15,10 +15,17 @@ export default class FridgeContainer extends React.Component {
             </Card.Meta>
             <Card.Description>Calories: {this.props.grocery.calories}</Card.Description>
           </Card.Content>
-          <Card.Content extra>
-            <a>
+          <Card.Content extra textAlign='center'>
+          {this.props.editMode?
+            <div>
+              <Button basic onClick={() => this.props.onClick(this.props.grocery)}>
+                Add
+              </Button>
+            </div>
+          :
+            ''
+          }
 
-            </a>
           </Card.Content>
        </Card>
       </Grid.Column>

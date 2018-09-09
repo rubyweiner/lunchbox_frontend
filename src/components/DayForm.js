@@ -27,8 +27,13 @@ export default class DayForm extends React.Component {
             )}
           </Item.Group>
 
-          <Form.Button basic>Add Grocery</Form.Button>
-          <Form.Button basic>Save</Form.Button>
+          <Form.Button basic onClick={() => this.props.onClick()}>
+          Add Grocery
+          </Form.Button>
+
+          <Form.Button basic>
+          Save
+          </Form.Button>
 
       </Form>
     )
