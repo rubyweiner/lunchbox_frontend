@@ -23,14 +23,30 @@ export default class DaySpec extends React.Component {
     this.props.deselectDay()
   }
 
-  removeGrocery = (day) => {
+  removeGrocery = (grocery) => {
     let groceries = this.state.groceries
-    groceries.splice( groceries.indexOf(day), 1 )
+    groceries.splice( groceries.indexOf(grocery), 1 )
     this.setState({
       groceries: groceries
     })
 
-    // add patch fetch to make these changes persist
+    this.patchDay()
+  }
+
+  patchDay = () => {
+    // DOESNT WORK~! maybe because no internet connection
+    debugger
+    fetch (`http://localhost:3000/days/${this.state.currentDay.id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      body: JSON.stringify(
+        {groceries: this.state.groceries}
+      )
+    })
+
   }
 
   handleClick = () => {
