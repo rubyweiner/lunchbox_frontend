@@ -8,6 +8,11 @@ export default class FridgeContainer extends React.Component {
   handleClick = (grocery) => {
     this.props.addGroceryToDay(grocery)
   }
+
+  deleteGrocery = (grocery) => {
+    this.props.deleteGrocery(grocery)
+  }
+
   render() {
 
     return (
@@ -20,6 +25,7 @@ export default class FridgeContainer extends React.Component {
                 grocery={grocery}
                 editMode={this.props.editMode}
                 onClick={() => {this.handleClick(grocery)}}
+                deleteGrocery={() => this.deleteGrocery(grocery)}
               />
             )}
           </Grid>

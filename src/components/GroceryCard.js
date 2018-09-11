@@ -23,8 +23,9 @@ export default class FridgeContainer extends React.Component {
               </Button>
             </div>
           :
-            ''
+            <Button basic icon="trash alternate outline" onClick={() => this.props.deleteGrocery(this.props.grocery)}></Button>
           }
+
 
           </Card.Content>
        </Card>

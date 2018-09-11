@@ -13,25 +13,25 @@ export default class GroceryForm extends React.Component {
       </Header>
       <Card.Content>
     		<Form size={"mini"}>
-          <Form.Field  >
+          <Form.Field id="name">
             <label>Name</label>
             <input />
           </Form.Field>
           <Form.Group >
-            <Form.Field width={4}>
+            <Form.Field id="calories" width={4}>
               <label>Calories</label>
               <input  />
             </Form.Field>
-            <Form.Field >
+            <Form.Field id="expiration_date">
               <label>Exipration Date</label>
               <input  placeholder="ex. 2018-09-17"/>
             </Form.Field>
           </Form.Group>
-          <Form.Field >
+          <Form.Field id="image_url">
             <label>Image URL</label>
             <input  />
           </Form.Field>
-          <Button type='submit' onClick={(event) => this.onClick(event)}>Submit</Button>
+          <Button type='submit' onClick={(event) => this.props.onClick(event)}>Submit</Button>
     		</Form>
       </Card.Content>
     </Card>

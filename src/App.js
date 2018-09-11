@@ -14,6 +14,7 @@ class App extends Component {
     daySelected: false,
     day: null,
     editMode: false,
+    newGrocery: [],
     newGroceryMode: false
   }
 
@@ -46,6 +47,44 @@ class App extends Component {
     this.setState(
       {
         newGroceryMode: true
+      }
+    )
+  }
+
+  postGrocery = (inputs) => {
+    fetch (`http://localhost:3000/groceries`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "appliaction/json"
+      },
+      body: JSON.stringify(
+        {
+          name: inputs[0].value,
+          calories: inputs[1].value,
+          expiration_date: inputs[2].value,
+          img_url: inputs[3].value,
+          user_id: 1,
+          day_id: null
+        }
+      )
+    })
+    .then(response => response.json())
+    .then(json => this.createNewGrocery(json))
+
+  }
+
+  createNewGrocery = (grocery) => {
+    this.setState(
+      {newGrocery: grocery}
+    )
+
+    let groceries = this.state.groceries
+    groceries.push(this.state.newGrocery)
+    this.setState(
+      {
+        groceries: groceries,
+        newGroceryMode: false
       }
     )
   }
@@ -108,12 +147,24 @@ class App extends Component {
       .then(json => console.log(json))
   }
 
+  deleteGrocery = (grocery) => {
+    let groceries = this.state.groceries
+    groceries.splice(groceries.indexOf(grocery), 1)
+    this.setState(
+      {groceries: groceries}
+    )
+    fetch (`http://localhost:3000/groceries/${grocery.id}`, {
+      method: "DELETE"
+    })
+    .then(response => response.json())
+  }
+
 
   render() {
     return (
       <div className="ui segment">
       <MenuBar />
-      <NavBar newGroceryMode={this.state.newGroceryMode}/>
+      <NavBar newGroceryMode={this.state.newGroceryMode} postGrocery={this.postGrocery}/>
       <div className="body">
         <Grid columns='equal'>
           <Grid.Column >
@@ -122,6 +173,7 @@ class App extends Component {
                 groceries={this.state.groceries}
                 editMode={this.state.editMode}
                 addGroceryToDay={this.addGroceryToDay}
+                deleteGrocery={this.deleteGrocery}
               />
             </Segment>
           </Grid.Column>
