@@ -3,7 +3,7 @@ import GroceryItem from '../components/GroceryItem'
 import {Card, Item, Button} from 'semantic-ui-react'
 
 
-export default class DayCard_detailed extends React.Component {
+export default class DayCardDetailed extends React.Component {
 
   handleClick = (grocery) => {
     this.props.removeGrocery(grocery)
@@ -19,7 +19,7 @@ export default class DayCard_detailed extends React.Component {
           <Card.Meta>{this.props.day.meal_name}</Card.Meta>
           <Card.Description>
             <Item.Group >
-              {this.props.day.groceries.map(grocery =>
+              {this.props.groceries.map(grocery =>
                 <GroceryItem grocery={grocery} onClick={() => this.handleClick(grocery)} editMode={this.props.editMode}/>
               )}
             </Item.Group>

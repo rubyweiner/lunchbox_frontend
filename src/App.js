@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import './App.css';
 import FridgeContainer from './containers/FridgeContainer'
 import WeekdayContainer from './containers/WeekdayContainer'
-import {Grid, Segment, Image} from 'semantic-ui-react'
+import {Grid, Segment, Button} from 'semantic-ui-react'
 import NavBar from './components/NavBar'
 import DaySpec from './containers/DaySpec'
+import MenuBar from './components/MenuBar'
 
 class App extends Component {
   state = {
@@ -13,7 +14,7 @@ class App extends Component {
     daySelected: false,
     day: null,
     editMode: false,
-    groceryToAdd: null
+    newGroceryMode: false
   }
 
   fetchGroceries = () => {
@@ -41,6 +42,14 @@ class App extends Component {
     this.fetchDays()
   }
 
+  renderGroceryForm = () => {
+    this.setState(
+      {
+        newGroceryMode: true
+      }
+    )
+  }
+
   dayDetails = (day) => {
     this.setState(
       {
@@ -59,35 +68,74 @@ class App extends Component {
     )
   }
 
-  addGroceries = () => {
+  addGroceries = (day) => {
     this.setState(
-      {editMode: true}
+      {
+        editMode: true,
+        day: day
+      }
     )
   }
 
   addGroceryToDay = (grocery) => {
+    let groceries= this.state.day.groceries
+    groceries.push(grocery)
+
     this.setState(
-      {groceryToAdd: grocery}
+      {
+        groceries: groceries
+      }
     )
-    //Patch fetch ?????????
+
+    // resolve immediate rendering issues
+    this.patchGrocery(grocery)
   }
+
+  patchGrocery = (grocery) => {
+    let day_id = this.state.day.id
+    fetch (`http://localhost:3000/groceries/${grocery.id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(
+        {
+          day_id: day_id
+        }
+      )
+    })
+      .then(response => response.json())
+      .then(json => console.log(json))
+  }
+
 
   render() {
     return (
       <div className="ui segment">
-      <NavBar />
+      <MenuBar />
+      <NavBar newGroceryMode={this.state.newGroceryMode}/>
       <div className="body">
         <Grid columns='equal'>
           <Grid.Column >
             <Segment>
-              <FridgeContainer groceries={this.state.groceries} editMode={this.state.editMode} addGroceryToDay={this.addGroceryToDay}/>
+              <FridgeContainer
+                groceries={this.state.groceries}
+                editMode={this.state.editMode}
+                addGroceryToDay={this.addGroceryToDay}
+              />
             </Segment>
           </Grid.Column>
           <Grid.Column width={5}>
+            <Segment className="ui center aligned segment">
+              <Button basic size="huge" onClick={this.renderGroceryForm}>
+                New Grocery
+              </Button>
+            </Segment>
             <Segment>
             {this.state.daySelected ?
               <DaySpec
                 day={this.state.day}
+                groceries={this.state.day.groceries}
                 deselectDay={() => this.deselectDay()}
                 addGroceries={this.addGroceries}
                 groceryToAdd={this.state.groceryToAdd}

@@ -8,13 +8,6 @@ const options = [
 ]
 
 export default class DayForm extends React.Component {
-  state = {}
-
-  handleChange = (e, { value }) => {
-    this.setState(
-      { value }
-    )
-  }
 
   render() {
     return(
@@ -22,17 +15,21 @@ export default class DayForm extends React.Component {
         <h1>{this.props.day.name}</h1>
         <Form.Input fluid label='Meal Name' placeholder={this.props.day.meal_name} />
           <Item.Group >
-            {this.props.day.groceries.map(grocery =>
-              <GroceryItem grocery={grocery} editMode={this.props.editMode} onClick={this.props.removeGrocery}/>
+            {this.props.groceries.map(grocery =>
+              <GroceryItem
+                grocery={grocery}
+                editMode={this.props.editMode}
+                onClick={this.props.removeGrocery}
+              />
             )}
           </Item.Group>
 
-          <Form.Button basic onClick={() => this.props.onClick()}>
-          Add Grocery
+          <Form.Button basic onClick={() => this.props.onAdd(this.props.day)}>
+            Add Grocery
           </Form.Button>
 
-          <Form.Button basic>
-          Save
+          <Form.Button basic onClick={() => this.props.onSave()}>
+            Save
           </Form.Button>
 
       </Form>

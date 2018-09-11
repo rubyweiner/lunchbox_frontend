@@ -16,7 +16,11 @@ export default class FridgeContainer extends React.Component {
           <Container textAlign='center'><Header as='h2'>Fridge</Header></Container>
           <Grid columns={3} padded>
             {this.props.groceries.map(grocery =>
-              <GroceryCard grocery={grocery} editMode={this.props.editMode} onClick={() => {this.handleClick(grocery)}}/>
+              <GroceryCard
+                grocery={grocery}
+                editMode={this.props.editMode}
+                onClick={() => {this.handleClick(grocery)}}
+              />
             )}
           </Grid>
         </Container>

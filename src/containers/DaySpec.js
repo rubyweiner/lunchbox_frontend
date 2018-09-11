@@ -1,7 +1,7 @@
 import React from 'react';
 import DayForm from '../components/DayForm'
-import DayCard_detailed from '../components/DayCard_detailed'
-import {Card, Button,  Image as ImageComponent, Item} from 'semantic-ui-react'
+import DayCardDetailed from '../components/DayCardDetailed'
+
 
 
 export default class DaySpec extends React.Component {
@@ -9,7 +9,8 @@ export default class DaySpec extends React.Component {
   state = {
     editMode: false,
     groceries: this.props.day.groceries,
-    currentDay: null
+    currentDay: null,
+    currentGrocery: this.props.groceryToAdd
   }
 
   editDay = (day) => {
@@ -27,42 +28,54 @@ export default class DaySpec extends React.Component {
     let groceries = this.state.groceries
     groceries.splice( groceries.indexOf(grocery), 1 )
     this.setState({
-      groceries: groceries
+      groceries: groceries,
+      currentGrocery: grocery
     })
 
-    this.patchDay()
+    this.patchDeleteGrocery(grocery)
   }
 
-  patchDay = () => {
-    // DOESNT WORK~! maybe because no internet connection
-    debugger
-    fetch (`http://localhost:3000/days/${this.state.currentDay.id}`, {
+  patchDeleteGrocery = (grocery) => {
+    fetch (`http://localhost:3000/groceries/${grocery.id}`, {
       method: "PATCH",
       headers: {
-        "Content-Type": "application/json",
-        "Accept": "application/json"
+        "Content-Type": "application/json"
       },
       body: JSON.stringify(
-        {groceries: this.state.groceries}
+        {
+          day_id: null
+        }
       )
     })
-
+      .then(response => response.json())
+      .then(json => console.log(json))
   }
 
-  handleClick = () => {
-    this.props.addGroceries()
+  handleAdd = (day) => {
+    this.props.addGroceries(day)
   }
 
+  handleSave = () => {
+
+  }
 
 
   render() {
 
     return (
       this.state.editMode ?
-        <DayForm day={this.props.day} editMode={this.state.editMode} removeGrocery={this.removeGrocery} onClick={() => this.handleClick()}/>
-      :
-        <DayCard_detailed
+        <DayForm
           day={this.props.day}
+          groceries={this.props.groceries}
+          editMode={this.state.editMode}
+          removeGrocery={this.removeGrocery}
+          onAdd={(day) => this.handleAdd(day)}
+          onSave={() => this.handleSave()}
+        />
+      :
+        <DayCardDetailed
+          day={this.props.day}
+          groceries={this.props.groceries}
           editDay={this.editDay}
           deselectDay={() => this.deselectDay()}
           removeGrocery={this.removeGrocery}

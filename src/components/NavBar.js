@@ -1,14 +1,20 @@
 import React from 'react'
+import GroceryForm from '../components/GroceryForm'
 
 
-const Nav = () => {
-	return (
-	<div className="topheader">
-    <div className="main-page-title">
-      LunchBox
-    </div>
-	</div>
-	)
+export default class NavBar extends React.Component {
+
+	render() {
+		return (
+		<div className="topheader">
+	    <div className="main-page-title">
+	    </div>
+			{this.props.newGroceryMode ?
+				<GroceryForm />
+			:
+				null
+			}
+		</div>
+		)
+	}
 }
-
-export default Nav

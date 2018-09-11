@@ -1,8 +1,10 @@
 import React from 'react';
-import {Image, Item, Button} from 'semantic-ui-react'
+import {Item, Button} from 'semantic-ui-react'
 
 
 export default class GroceryItem extends React.Component {
+
+
   render() {
     return (
       <Item>
