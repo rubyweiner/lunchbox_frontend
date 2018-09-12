@@ -6,7 +6,7 @@ export default class FridgeContainer extends React.Component {
   render() {
     return (
       <Grid.Column>
-        <Card href='#'>
+        <Card >
           <Image src={this.props.grocery.img_url} />
           <Card.Content>
             <Card.Header>{this.props.grocery.name}</Card.Header>

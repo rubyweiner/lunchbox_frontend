@@ -19,7 +19,7 @@ export default class DayCardDetailed extends React.Component {
           <Card.Meta>{this.props.day.meal_name}</Card.Meta>
           <Card.Description>
             <Item.Group >
-              {this.props.groceries.map(grocery =>
+              {this.props.day.groceries.map(grocery =>
                 <GroceryItem grocery={grocery} onClick={() => this.handleClick(grocery)} editMode={this.props.editMode}/>
               )}
             </Item.Group>

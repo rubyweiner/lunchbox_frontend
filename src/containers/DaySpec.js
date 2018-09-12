@@ -51,14 +51,35 @@ export default class DaySpec extends React.Component {
       .then(json => console.log(json))
   }
 
+  patchUpdateDay = (meal_name, day) => {
+    fetch (`http://localhost:3000/days/${day.id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(
+        {
+          meal_name: meal_name
+        }
+      )
+    })
+      .then(response => response.json())
+      .then(json => this.setState(
+          {
+            day: json,
+            editMode: false
+      })
+    )
+  }
+
   handleAdd = (day) => {
     this.props.addGroceries(day)
   }
 
-  handleSave = () => {
-
+  handleSave = (event, day) => {
+    let meal_name = event.currentTarget.form[0].value
+    this.patchUpdateDay(meal_name, day)
   }
-
 
   render() {
 
@@ -66,16 +87,14 @@ export default class DaySpec extends React.Component {
       this.state.editMode ?
         <DayForm
           day={this.props.day}
-          groceries={this.props.groceries}
           editMode={this.state.editMode}
           removeGrocery={this.removeGrocery}
           onAdd={(day) => this.handleAdd(day)}
-          onSave={() => this.handleSave()}
+          onSave={this.handleSave}
         />
       :
         <DayCardDetailed
           day={this.props.day}
-          groceries={this.props.groceries}
           editDay={this.editDay}
           deselectDay={() => this.deselectDay()}
           removeGrocery={this.removeGrocery}

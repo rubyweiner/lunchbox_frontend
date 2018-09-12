@@ -15,7 +15,7 @@ export default class DayForm extends React.Component {
         <h1>{this.props.day.name}</h1>
         <Form.Input fluid label='Meal Name' placeholder={this.props.day.meal_name} />
           <Item.Group >
-            {this.props.groceries.map(grocery =>
+            {this.props.day.groceries.map(grocery =>
               <GroceryItem
                 grocery={grocery}
                 editMode={this.props.editMode}
@@ -28,7 +28,7 @@ export default class DayForm extends React.Component {
             Add Grocery
           </Form.Button>
 
-          <Form.Button basic onClick={() => this.props.onSave()}>
+          <Form.Button basic onClick={(event) => this.props.onSave(event, this.props.day)}>
             Save
           </Form.Button>
 

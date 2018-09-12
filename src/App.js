@@ -117,16 +117,11 @@ class App extends Component {
   }
 
   addGroceryToDay = (grocery) => {
-    let groceries= this.state.day.groceries
-    groceries.push(grocery)
-
+    let groceries = this.state.groceries
+    groceries.splice( groceries.indexOf(grocery), 1 )
     this.setState(
-      {
-        groceries: groceries
-      }
+      {groceries: groceries}
     )
-
-    // resolve immediate rendering issues
     this.patchGrocery(grocery)
   }
 
@@ -145,6 +140,8 @@ class App extends Component {
     })
       .then(response => response.json())
       .then(json => console.log(json))
+    this.fetchDays()
+
   }
 
   deleteGrocery = (grocery) => {

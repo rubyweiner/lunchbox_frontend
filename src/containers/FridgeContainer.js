@@ -5,7 +5,8 @@ import {Container, Header, Grid} from 'semantic-ui-react'
 
 export default class FridgeContainer extends React.Component {
 
-  handleClick = (grocery) => {
+
+  addGrocery = (grocery) => {
     this.props.addGroceryToDay(grocery)
   }
 
@@ -21,12 +22,15 @@ export default class FridgeContainer extends React.Component {
           <Container textAlign='center'><Header as='h2'>Fridge</Header></Container>
           <Grid columns={3} padded>
             {this.props.groceries.map(grocery =>
-              <GroceryCard
-                grocery={grocery}
-                editMode={this.props.editMode}
-                onClick={() => {this.handleClick(grocery)}}
-                deleteGrocery={() => this.deleteGrocery(grocery)}
-              />
+
+                <GroceryCard
+                  grocery={grocery}
+                  editMode={this.props.editMode}
+                  onClick={this.addGrocery}
+                  deleteGrocery={() => this.deleteGrocery(grocery)}
+                />
+
+              
             )}
           </Grid>
         </Container>
